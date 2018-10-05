@@ -5,7 +5,7 @@ const prismicURL = 'https://athleticgreens.prismic.io/api/v2'
 app.get('/api/:page', (req, res) => {
   Prismic.api(prismicURL)
     .then(function(api) {
-      return api.query(Prismic.Predicates.at('document.type', 'homepage'))
+      return api.query(Prismic.Predicates.at('document.type', req.params.page))
     })
     .then(function(response) {
       res.send(response.results[0].data)
