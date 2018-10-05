@@ -15,7 +15,6 @@
 export default {
   async asyncData({ app }) {
     const content = await app.$axios.$get('/api/homepage')
-    console.log(content)
     return content
   }
 }

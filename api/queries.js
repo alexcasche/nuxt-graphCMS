@@ -1,6 +1,6 @@
 const queries = {
   homepage: `{
-    homepageCarousels {
+    homepageHeroes {
       headline,
       image {
         url

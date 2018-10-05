@@ -1,19 +1,15 @@
 const app = require('express')()
-const axios = require('axios')
-const graphCMS =
-  'https://api-uswest.graphcms.com/v1/cjmuo8ke601gj01gha4wwi79a/master'
-const queries = require('./queries')
+const Prismic = require('prismic-javascript')
+const prismicURL = 'https://athleticgreens.prismic.io/api/v2'
 
 app.get('/api/:page', (req, res) => {
-  axios({
-    url: graphCMS,
-    method: 'post',
-    data: {
-      query: queries[req.params.page]
-    }
-  }).then(result => {
-    res.send(result.data.data)
-  })
+  Prismic.api(prismicURL)
+    .then(function(api) {
+      return api.query(Prismic.Predicates.at('document.type', 'homepage'))
+    })
+    .then(function(response) {
+      res.send(response.results[0].data)
+    })
 })
 
 module.exports = app
